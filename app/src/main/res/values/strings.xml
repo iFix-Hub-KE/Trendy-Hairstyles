@@ -1,4 +1,15 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Trendy Hairstyles</string>
     <string name="trendy_hairstyles">Trendy Hairstyles</string>
+    <string name="sign_in">Sign In</string>
+    <string name="email_address">Email Address...</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="don_t_have_an_account_create_now" tools:ignore="StringEscaping">Dont have an account? <b>Create Now</b></string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="full_names">Full Names</string>
+    <string name="already_have_an_account_sign_in">Already have an account? <b>Sign in</b></string>
+    <string name="re_enter_password">Re-enter Password</string>
+    <string name="about_you">About you ...</string>
 </resources>
