@@ -6,10 +6,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.widget.Toolbar;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,6 +41,11 @@ public class MainActivity extends AppCompatActivity {
             case R.id.bottom_nav_home:
                 mDrawer.openDrawer(GravityCompat.START);
                 return true;
+
+            case R.id.nav_logout:
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(MainActivity.this,SignInActivity.class));
+                finish();
         }
         return super.onOptionsItemSelected(item);
     }
