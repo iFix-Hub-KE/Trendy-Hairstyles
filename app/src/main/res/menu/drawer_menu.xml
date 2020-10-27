@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group>
+        <item android:id="@+id/nav_switch"
+            android:icon="@drawable/dots"
+            android:title="Dark Mode"/>
+    </group>
+
+    <group>
+        <item android:id="@+id/nav_about"
+            android:icon="@drawable/ic_info"
+            android:title="About"/>
+
+        <item android:id="@+id/nav_report"
+            android:icon="@drawable/ic_report"
+            android:title="Report a Problem"/>
+    </group>
+
+    <group>
+        <item android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_settings"
+            android:title="Settings"/>
+
+        <item android:id="@+id/nav_logout"
+            android:title="Logout"/>
+    </group>
+
+</menu>

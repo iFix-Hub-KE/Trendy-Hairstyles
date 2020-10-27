@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "934263990910",
+    "firebase_url": "https://trendy-hairstyles-ac0c0.firebaseio.com",
+    "project_id": "trendy-hairstyles-ac0c0",
+    "storage_bucket": "trendy-hairstyles-ac0c0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:934263990910:android:51dcf485dd947ce56b062f",
+        "android_client_info": {
+          "package_name": "com.ifixhubke.trendyhairstyles"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "934263990910-a60datmv167d7c2kmtq2u80001qi9dk9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAw4wYmnZl9KWlX4VtX0niYm5TFKvPnFYM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "934263990910-a60datmv167d7c2kmtq2u80001qi9dk9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
