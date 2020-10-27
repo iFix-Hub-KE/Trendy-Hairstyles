@@ -40,6 +40,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
+
         if (mAuth.getCurrentUser() !=null){
             startActivity(new Intent(SignUpActivity.this,MainActivity.class));
             finish();
@@ -89,7 +90,12 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
-
+    logIn.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            startActivity(new Intent(SignUpActivity.this,SignInActivity.class));
+        }
+    });
 
 
     }
