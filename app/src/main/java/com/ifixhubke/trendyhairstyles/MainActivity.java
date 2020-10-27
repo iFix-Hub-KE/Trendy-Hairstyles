@@ -41,11 +41,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.bottom_nav_home:
                 mDrawer.openDrawer(GravityCompat.START);
                 return true;
-
-            case R.id.nav_logout:
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(MainActivity.this,SignInActivity.class));
-                finish();
         }
         return super.onOptionsItemSelected(item);
     }
