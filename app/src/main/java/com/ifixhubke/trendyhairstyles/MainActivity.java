@@ -5,32 +5,31 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
 
     DrawerLayout mDrawer;
-    Toolbar mToolbar;
     NavigationView mNavigationView;
     ActionBarDrawerToggle mActionBarDrawerToggle;
+    BottomNavigationView mBottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       // mToolbar = findViewById(R.id.my_toolbar);
         mDrawer = findViewById(R.id.drawerLayout);
         mNavigationView = findViewById(R.id.nav_view);
-       // mToolbar.setTitle("Home");
-       // setSupportActionBar(mToolbar);
+        mBottomNavigationView = findViewById(R.id.bottomNavigationView);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Home");
 
@@ -38,7 +37,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mDrawer.addDrawerListener(mActionBarDrawerToggle);
         mActionBarDrawerToggle.syncState();
 
-        mNavigationView.setNavigationItemSelectedListener(this);
+       mNavigationView.setNavigationItemSelectedListener(this);
+        mBottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        //setting the fragment that will be loaded when the app starts
+        Fragment fragment = new HomeFragment();
+        addFragment(fragment);
     }
 
     @Override
@@ -56,14 +60,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             }
             case R.id.nav_about:{
+                Fragment fragment = new AboutFragment();
+                addFragment(fragment);
                 Toast.makeText(this, "About", Toast.LENGTH_SHORT).show();
                 break;
             }
             case R.id.nav_report:{
+                Fragment fragment = new ReportFragment();
+                addFragment(fragment);
                 Toast.makeText(this, "Report", Toast.LENGTH_SHORT).show();
                 break;
             }
             case R.id.nav_settings:{
+                Fragment fragment = new SettingsFragment();
+                addFragment(fragment);
                 Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
                 break;
             }
@@ -91,4 +101,42 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             super.onBackPressed();
         }
     }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected( MenuItem menuItem) {
+                    switch (menuItem.getItemId()){
+                        case R.id.bottom_nav_home:{
+                            Fragment fragment = new HomeFragment();
+                            addFragment(fragment);
+                            Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_SHORT).show();
+                            return true;
+                        }
+                        case R.id.bottom_nav_notifications:{
+                            Fragment fragment = new NotificationsFragment();
+                            addFragment(fragment);
+                            Toast.makeText(MainActivity.this, "Notifications", Toast.LENGTH_SHORT).show();
+                            return true;
+
+                        }
+                        case R.id.bottom_nav_saved:{
+                            Fragment fragment = new SavedFragment();
+                            addFragment(fragment);
+                            Toast.makeText(MainActivity.this, "Saved", Toast.LENGTH_SHORT).show();
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+            };
+
+    private void addFragment(Fragment fragment){
+        getSupportFragmentManager()
+                .beginTransaction()
+                .addToBackStack("")
+                .replace(R.id.fragment_container,fragment)
+                .commit();
+    }
+
 }
