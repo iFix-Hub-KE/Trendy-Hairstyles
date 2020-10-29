@@ -62,6 +62,7 @@ public class SignInActivity extends AppCompatActivity {
                         if (task.isSuccessful()){
                             Toast.makeText(SignInActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(SignInActivity.this,MainActivity.class));
+                            finish();
                         }
                         else {
                             Toast.makeText(SignInActivity.this, "An Error Occurred", Toast.LENGTH_SHORT).show();

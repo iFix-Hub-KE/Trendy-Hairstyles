@@ -2,7 +2,7 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Home" android:icon="@drawable/ic_home" android:id="@+id/bottom_nav_home" app:showAsAction="always"/>
-    <item android:title="Notifications" android:icon="@drawable/ic_notifications" android:id="@+id/bottom_nav_notifications" app:showAsAction="always"/>
-    <item android:title="Saved" android:icon="@drawable/ic_bookmarks" android:id="@+id/bottom_nav_saved" app:showAsAction="always"/>
+    <item android:title="Home" android:icon="@drawable/ic_home" android:id="@+id/homeFragment" app:showAsAction="always"/>
+    <item android:title="Notifications" android:icon="@drawable/ic_notifications" android:id="@+id/notificationsFragment" app:showAsAction="always"/>
+    <item android:title="Saved" android:icon="@drawable/ic_bookmarks" android:id="@+id/savedFragment" app:showAsAction="always"/>
 </menu>

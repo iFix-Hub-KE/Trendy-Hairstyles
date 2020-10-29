@@ -48,4 +48,11 @@ dependencies {
     //Firebase Realtime Database
     implementation 'com.google.firebase:firebase-database:19.4.0'
 
+    def nav_version = "2.3.1"
+
+    // Java language implementation
+    implementation "androidx.navigation:navigation-fragment:$nav_version"
+    implementation "androidx.navigation:navigation-ui:$nav_version"
+
+
 }

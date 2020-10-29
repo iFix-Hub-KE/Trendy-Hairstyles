@@ -8,17 +8,15 @@
     </group>
 
     <group>
-        <item android:id="@+id/nav_about"
+        <item android:id="@+id/aboutFragment"
             android:icon="@drawable/ic_info"
             android:title="About"/>
 
-        <item android:id="@+id/nav_report"
+        <item android:id="@+id/reportFragment"
             android:icon="@drawable/ic_report"
             android:title="Report a Problem"/>
-    </group>
 
-    <group>
-        <item android:id="@+id/nav_settings"
+        <item android:id="@+id/settingsFragment"
             android:icon="@drawable/ic_settings"
             android:title="Settings"/>
 

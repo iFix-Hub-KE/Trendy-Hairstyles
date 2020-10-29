@@ -53,50 +53,34 @@ public class SignUpActivity extends AppCompatActivity {
                 String passWord = password.getText().toString().trim();
                 String rePass = reEnterPass.getText().toString().trim();
 
-                if (TextUtils.isEmpty(eMail)){
-                    mail.setError("Email required!");
-                    return;
-                }
-                if (TextUtils.isEmpty(passWord)){
-                    password.setError("Password required!");
-                    return;
-                }
-                if (passWord.length() < 6 ){
-                    password.setError("Password should be 6 or more characters");
-                    return;
-                }
-                if(TextUtils.isEmpty(rePass)){
-                    reEnterPass.setError("Re-Enter Password");
-                    return;
-                }
-                if (!passWord.equals(rePass)){
-                    reEnterPass.setError("Not Equal to Password");
-                    return;
-                }
+                if (TextUtils.isEmpty(eMail)){ mail.setError("Email required!");return; }
+                if (TextUtils.isEmpty(passWord)){ password.setError("Password required!");return; }
+                if (passWord.length() < 6 ){ password.setError("Password should be 6 or more characters");return; }
+                if(TextUtils.isEmpty(rePass)){ reEnterPass.setError("Re-Enter Password");return; }
+                if (!passWord.equals(rePass)){ reEnterPass.setError("Not Equal to Password");return; }
+
+                logIn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(SignUpActivity.this,SignInActivity.class));
+                    }
+                });
 
             mAuth.createUserWithEmailAndPassword(eMail,passWord).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()){
-                        Toast.makeText(SignUpActivity.this, "Account Created", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(SignUpActivity.this,MainActivity.class));
+                        Toast.makeText(SignUpActivity.this, "Account Created Successfully", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(SignUpActivity.this,SignInActivity.class));
+                        mAuth.signOut();
+                        finish();
                     }
                     else {
-                        Toast.makeText(SignUpActivity.this, "An Error Occurred", Toast.LENGTH_SHORT).show();
-
+                        Toast.makeText(SignUpActivity.this, "An Error Occurred While Creating Your Account", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
             }
         });
-
-    logIn.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            startActivity(new Intent(SignUpActivity.this,SignInActivity.class));
-        }
-    });
-
-
     }
 }

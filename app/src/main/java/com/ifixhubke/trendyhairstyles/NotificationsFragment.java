@@ -11,11 +11,6 @@ import android.view.ViewGroup;
 
 public class NotificationsFragment extends Fragment {
 
-
-    public NotificationsFragment() {
-        // Required empty public constructor
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
