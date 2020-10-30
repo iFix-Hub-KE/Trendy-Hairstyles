@@ -1,6 +1,5 @@
 package com.ifixhubke.trendyhairstyles;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,12 +8,9 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class SignInActivity extends AppCompatActivity {
@@ -23,6 +19,7 @@ public class SignInActivity extends AppCompatActivity {
     Button signIn;
     TextView createAcc,forgotPass;
     FirebaseAuth mAuth;
+    ProgressBar mProgressbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,53 +31,56 @@ public class SignInActivity extends AppCompatActivity {
         signIn = findViewById(R.id.login_button);
         createAcc = findViewById(R.id.create_account);
         forgotPass = findViewById(R.id.forgot_password);
+        mProgressbar = findViewById(R.id.sign_in_progressbar);
         mAuth = FirebaseAuth.getInstance();
 
-        signIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        signIn.setOnClickListener(v -> {
 
-                String eMail = mEmail.getText().toString().trim();
-                String passWord = mPassword.getText().toString().trim();
+            mProgressbar.setVisibility(View.VISIBLE);
 
-                if (TextUtils.isEmpty(eMail)){
-                    mEmail.setError("Email required!");
-                    return;
-                }
-                if (TextUtils.isEmpty(passWord)){
-                    mPassword.setError("Password required!");
-                    return;
-                }
-                if (passWord.length() < 6 ){
-                    mPassword.setError("Password should be 6 or more characters");
-                    return;
-                }
+            String eMail = mEmail.getText().toString().trim();
+            String passWord = mPassword.getText().toString().trim();
 
-                mAuth.signInWithEmailAndPassword(eMail,passWord).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()){
-                            Toast.makeText(SignInActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(SignInActivity.this,MainActivity.class));
-                            finish();
-                        }
-                        else {
-                            Toast.makeText(SignInActivity.this, "An Error Occurred", Toast.LENGTH_SHORT).show();
-
-
-                        }
-                    }
-                });
-
+            if (TextUtils.isEmpty(eMail)){
+                mEmail.setError("Email required!");
+                mProgressbar.setVisibility(View.INVISIBLE);
+                return;
             }
+            if (TextUtils.isEmpty(passWord)){
+                mPassword.setError("Password required!");
+                mProgressbar.setVisibility(View.INVISIBLE);
+                return;
+            }
+            if (passWord.length() < 6 ){
+                mPassword.setError("Password should be 6 or more characters");
+                mProgressbar.setVisibility(View.INVISIBLE);
+                return;
+            }
+
+            mAuth.signInWithEmailAndPassword(eMail,passWord).addOnCompleteListener(task -> {
+                if (task.isSuccessful()){
+                    mProgressbar.setVisibility(View.INVISIBLE);
+                    Toast.makeText(SignInActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(SignInActivity.this,MainActivity.class));
+                    finish();
+                }
+                else {
+                    mProgressbar.setVisibility(View.INVISIBLE);
+                    Toast.makeText(SignInActivity.this, "An Error Occurred," +
+                            "Check your Internet Connection and Try Again", Toast.LENGTH_LONG).show();
+                }
+            });
+
         });
 
-        createAcc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(SignInActivity.this,SignUpActivity.class));
-            }
+        createAcc.setOnClickListener(v -> {
+            startActivity(new Intent(SignInActivity.this,SignUpActivity.class));
+            finish();
         });
 
+        forgotPass.setOnClickListener(v -> {
+            PasswordResetDialog dialog = new PasswordResetDialog();
+            dialog.show(getSupportFragmentManager(), "dialog_password_reset");
+        });
     }
 }

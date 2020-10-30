@@ -126,6 +126,20 @@
                 app:layout_constraintTop_toBottomOf="@+id/password_edtx"
                 tools:ignore="Autofill" />
 
+
+
+            <ProgressBar
+                android:id="@+id/sign_up_progressBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
@@ -143,7 +157,7 @@
         app:layout_constraintTop_toBottomOf="@+id/credentials_card" />
 
     <TextView
-        android:id="@+id/create_account"
+        android:id="@+id/back_to_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -152,6 +166,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_button" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
