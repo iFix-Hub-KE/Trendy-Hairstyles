@@ -7,13 +7,122 @@
     tools:context=".PostFragment">
 
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/salon"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Post Hairstyle"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        app:hintTextAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:startIconDrawable="@drawable/ic_location"
+        app:startIconTint="@color/main">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/salon_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Shiro Salon"
+            tools:ignore="HardcodedText" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintEnd_toStartOf="@+id/style"
+        app:layout_constraintStart_toStartOf="@+id/salon"
+        app:layout_constraintTop_toBottomOf="@+id/salon"
+        app:startIconDrawable="@drawable/ic_baseline_brightness">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/style_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="6000"
+            tools:ignore="HardcodedText" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/style"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        app:layout_constraintEnd_toEndOf="@+id/salon"
+        app:layout_constraintStart_toEndOf="@+id/price"
+        app:layout_constraintTop_toTopOf="@+id/price"
+        app:startIconDrawable="@drawable/ic_hairstyle"
+        app:startIconTint="@color/main">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/style_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Rio Carnival"
+            tools:ignore="HardcodedText" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <EditText
+        android:id="@+id/emoji_entered"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:background="@drawable/emoji_background"
+        android:hint="Share some emojis"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/price"
+        tools:ignore="HardcodedText"
+        android:importantForAutofill="no" />
+
+    <ImageView
+        android:id="@+id/camera_to_choose_photo"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ic_camera"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emoji_entered"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/text_to_choose_photo"
+        style="@style/Widget.MaterialComponents.TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:hint="Choose a Picture to Share"
+        android:textStyle="italic"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
+        tools:ignore="HardcodedText"
+        app:layout_constraintBottom_toBottomOf="@+id/camera_to_choose_photo"
+        app:layout_constraintStart_toEndOf="@+id/camera_to_choose_photo"
+        app:layout_constraintTop_toTopOf="@+id/camera_to_choose_photo" />
+
+    <Button
+        android:id="@+id/post_style_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/post"
+        android:background="@drawable/edtx_border"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/camera_to_choose_photo" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,12 +7,11 @@
     tools:context=".NotificationsFragment">
 
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/notifications_recyclerview"
+        tools:listitem="@layout/notifications_recycler_row"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Notifications Fragment"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

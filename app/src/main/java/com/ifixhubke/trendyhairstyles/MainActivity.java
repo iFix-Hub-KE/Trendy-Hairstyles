@@ -7,10 +7,14 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -32,9 +36,8 @@ public class MainActivity extends AppCompatActivity  {
     BottomNavigationView mBottomNavigationView;
     AppBarConfiguration appBarConfiguration;
     NavController navController;
-    private static final String TAG = "MainActivity";
-
     TextView tv_name,tv_about;
+    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +51,30 @@ public class MainActivity extends AppCompatActivity  {
         tv_name = headerView.findViewById(R.id.profile_name);
         tv_about = headerView.findViewById(R.id.profile_about);
 
+        //Switch for Dark Mode
+        mNavigationView.getMenu().findItem(R.id.nav_dark_mode).setActionView(new Switch(this));
+
+        // To set switch is on/off:
+        ((Switch) mNavigationView.getMenu().findItem(R.id.nav_dark_mode).getActionView()).setChecked(false);
+
+        ((Switch) mNavigationView.getMenu().findItem(R.id.nav_dark_mode).getActionView())
+                .setOnCheckedChangeListener((buttonView, isChecked) -> {
+                    if(isChecked) {
+                        Toast.makeText(MainActivity.this, "Checked", Toast.LENGTH_SHORT).show();
+                        FirebaseAuth.getInstance().signOut();
+                        startActivity(new Intent(MainActivity.this,SignInActivity.class));
+                        finish();
+                    } else {
+                        Toast.makeText(MainActivity.this, "Unchecked", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
 
         //Setup Bottom Navigation View
         NavigationUI.setupWithNavController(mBottomNavigationView, navController);
 
-       //Setup Top Back button
+       //Setup Top Back post_style_button
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).setOpenableLayout(mDrawer).build();
         NavigationUI.setupActionBarWithNavController(this,navController,mDrawer);
 
@@ -61,7 +82,6 @@ public class MainActivity extends AppCompatActivity  {
         NavigationUI.setupWithNavController(mNavigationView,navController);
 
         fetchUserProfile();
-
     }
 
     @Override

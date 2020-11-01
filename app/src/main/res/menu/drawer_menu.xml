@@ -2,9 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group>
-        <item android:id="@+id/nav_switch"
-            android:icon="@drawable/dots"
-            android:title="Dark Mode"/>
+        <item android:id="@+id/nav_dark_mode"
+            android:icon="@drawable/ic_baseline_brightness"
+            android:title="Dark Mode"
+            android:actionLayout="@layout/dark_mode_switch"/>
     </group>
 
     <group>

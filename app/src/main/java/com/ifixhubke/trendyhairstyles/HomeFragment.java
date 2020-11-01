@@ -24,13 +24,13 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         FloatingActionButton createPost = view.findViewById(R.id.add_post_fab);
-        Button logout = view.findViewById(R.id.button_logout);
+        //Button logout = view.findViewById(R.id.button_logout);
 
-        logout.setOnClickListener(v -> {
+       /* logout.setOnClickListener(v -> {
             FirebaseAuth.getInstance().signOut();
             startActivity(new Intent(getActivity(),SignInActivity.class));
             getActivity().finish();
-        });
+        });*/
 
         createPost.setOnClickListener(v -> NavHostFragment.findNavController(HomeFragment.this).navigate(R.id.action_homeFragment_to_postFragment2));
         return view;
