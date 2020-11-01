@@ -25,7 +25,8 @@
             android:id="@+id/salon_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Shiro Salon"
+            android:hint="Weaved where (Salon)?"
+            android:inputType="text"
             tools:ignore="HardcodedText" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -44,7 +45,8 @@
             android:id="@+id/style_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="6000"
+            android:inputType="number"
+            android:hint="Price"
             tools:ignore="HardcodedText" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -63,7 +65,8 @@
             android:id="@+id/style_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Rio Carnival"
+            android:hint="Style Name"
+            android:inputType="textMultiLine"
             tools:ignore="HardcodedText" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -72,18 +75,18 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:ems="10"
         android:background="@drawable/emoji_background"
-        android:hint="Share some emojis"
+        android:ems="10"
         android:gravity="start|top"
+        android:hint="Share some emojis/ Caption"
+        android:importantForAutofill="no"
         android:inputType="textMultiLine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/price"
-        tools:ignore="HardcodedText"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/style"
+        tools:ignore="HardcodedText" />
 
     <ImageView
         android:id="@+id/camera_to_choose_photo"
@@ -98,7 +101,6 @@
 
     <TextView
         android:id="@+id/text_to_choose_photo"
-        style="@style/Widget.MaterialComponents.TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -106,6 +108,7 @@
         android:textStyle="italic"
         android:textColorHint="@color/black"
         android:textColor="@color/black"
+        android:background="@drawable/choose_pic_background"
         tools:ignore="HardcodedText"
         app:layout_constraintBottom_toBottomOf="@+id/camera_to_choose_photo"
         app:layout_constraintStart_toEndOf="@+id/camera_to_choose_photo"
