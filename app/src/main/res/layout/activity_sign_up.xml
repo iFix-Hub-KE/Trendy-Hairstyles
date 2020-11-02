@@ -15,15 +15,41 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/user_profile_image"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="8dp"
+        app:civ_border_color="#BF00FF"
+        app:civ_border_width="2dp"
+        android:src="@drawable/ic_profile_user"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/camera_to_choose_photo"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_i_camera_1891018"
+        app:civ_border_color="#BF00FF"
+        app:civ_border_width="2dp"
+        app:layout_constraintBottom_toBottomOf="@+id/user_profile_image"
+        app:layout_constraintEnd_toEndOf="@+id/user_profile_image"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/user_profile_image"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/credentials_card"
         android:layout_width="match_parent"
         android:layout_height="400dp"
-        android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
-        app:cardCornerRadius="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
         android:elevation="5dp"
+        app:cardCornerRadius="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,24 +60,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/sign_up"
-                android:textColor="@color/black"
-                android:textSize="30sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
                 android:id="@+id/username_field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="21dp"
+                android:layout_marginTop="52dp"
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/edtx_border"
                 android:hint="@string/email_address"
@@ -59,18 +74,18 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.511"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView2"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="Autofill" />
 
             <EditText
                 android:id="@+id/full_names_edtx"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/edtx_border"
                 android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/edtx_border"
                 android:hint="@string/full_names"
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -82,11 +97,11 @@
                 android:id="@+id/about_you_edtx"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/edtx_border"
                 android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/edtx_border"
                 android:hint="@string/about_you"
                 android:inputType="text"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -98,11 +113,11 @@
                 android:id="@+id/password_edtx"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/edtx_border"
                 android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/edtx_border"
                 android:hint="@string/password"
                 android:inputType="textPassword"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -114,18 +129,17 @@
                 android:id="@+id/re_password_edtx"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/edtx_border"
                 android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/edtx_border"
                 android:hint="@string/re_enter_password"
                 android:inputType="textPassword"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/password_edtx"
                 tools:ignore="Autofill" />
-
 
 
             <ProgressBar
@@ -166,7 +180,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_button" />
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
