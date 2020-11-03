@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.appcompat.widget.Toolbar;
 
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity  {
     BottomNavigationView mBottomNavigationView;
     AppBarConfiguration appBarConfiguration;
     NavController navController;
+    Toolbar mToolbar;
     TextView tv_name,tv_about;
     private static final String TAG = "MainActivity";
 
@@ -52,6 +54,10 @@ public class MainActivity extends AppCompatActivity  {
         View headerView = mNavigationView.getHeaderView(0);
         tv_name = headerView.findViewById(R.id.profile_name);
         tv_about = headerView.findViewById(R.id.profile_about);
+
+        //getSupportActionBar().hide();
+        mToolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
 
         //Switch for Dark Mode
         mNavigationView.getMenu().findItem(R.id.nav_dark_mode).setActionView(new Switch(this));
