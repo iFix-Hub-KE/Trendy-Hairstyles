@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group>
+    <group
+        android:id="@+id/grp_1"
+        android:checkableBehavior="single">
         <item android:id="@+id/nav_dark_mode"
             android:icon="@drawable/ic_baseline_brightness"
             android:title="Dark Mode"
             android:actionLayout="@layout/dark_mode_switch"/>
     </group>
 
-    <group>
+    <group
+        android:id="@+id/grp_2"
+        android:checkableBehavior="single">
         <item android:id="@+id/aboutFragment"
             android:icon="@drawable/ic_info"
             android:title="About"/>
@@ -20,6 +24,11 @@
         <item android:id="@+id/settingsFragment"
             android:icon="@drawable/ic_settings"
             android:title="Settings"/>
+    </group>
+
+    <group
+        android:id="@+id/grp_3"
+        android:checkableBehavior="single">
 
         <item android:id="@+id/nav_logout"
             android:title="Logout"/>

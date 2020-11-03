@@ -41,8 +41,5 @@
         android:layout_height="match_parent"
         app:headerLayout="@layout/header"
         app:menu="@menu/drawer_menu"
-        android:layout_gravity="start"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/bottomNavigationView"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_gravity="start"/>
 </androidx.drawerlayout.widget.DrawerLayout>

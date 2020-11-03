@@ -2,6 +2,7 @@ package com.ifixhubke.trendyhairstyles;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -11,6 +12,7 @@ import androidx.navigation.ui.NavigationUI;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -60,12 +62,9 @@ public class MainActivity extends AppCompatActivity  {
         ((Switch) mNavigationView.getMenu().findItem(R.id.nav_dark_mode).getActionView())
                 .setOnCheckedChangeListener((buttonView, isChecked) -> {
                     if(isChecked) {
-                        Toast.makeText(MainActivity.this, "Checked", Toast.LENGTH_SHORT).show();
-                        FirebaseAuth.getInstance().signOut();
-                        startActivity(new Intent(MainActivity.this,SignInActivity.class));
-                        finish();
+                        Toast.makeText(MainActivity.this, "Dark Mode Enabled", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(MainActivity.this, "Unchecked", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Dark Mode Disabled", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -82,6 +81,19 @@ public class MainActivity extends AppCompatActivity  {
         NavigationUI.setupWithNavController(mNavigationView,navController);
 
         fetchUserProfile();
+
+        //Logout user
+        MenuItem logout = mNavigationView.getMenu().findItem(R.id.nav_logout);
+        logout.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                FirebaseAuth.getInstance().signOut();
+                Toast.makeText(MainActivity.this, "Logged out succesfully!", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this,SignInActivity.class));
+                finish();
+                return true;
+            }
+        });
     }
 
     @Override
