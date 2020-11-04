@@ -18,6 +18,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -30,6 +32,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity  {
@@ -41,12 +45,14 @@ public class MainActivity extends AppCompatActivity  {
     NavController navController;
     Toolbar mToolbar;
     TextView tv_name,tv_about;
+
     private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         mBottomNavigationView = findViewById(R.id.bottomNavigationView);
         mDrawer = findViewById(R.id.drawerLayout);
@@ -129,4 +135,5 @@ public class MainActivity extends AppCompatActivity  {
             }
         });
     }
+
 }

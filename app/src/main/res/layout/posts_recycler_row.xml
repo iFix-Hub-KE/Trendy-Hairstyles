@@ -14,7 +14,7 @@
         android:layout_height="wrap_content">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/liker_profile_image"
+            android:id="@+id/poster_profile_image"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginStart="8dp"
@@ -36,13 +36,13 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/liker_profile_image"
-            app:layout_constraintTop_toTopOf="@+id/liker_profile_image" />
+            app:layout_constraintStart_toEndOf="@+id/poster_profile_image"
+            app:layout_constraintTop_toTopOf="@+id/poster_profile_image" />
 
         <ImageView
             android:id="@+id/style_image"
             android:layout_width="0dp"
-            android:layout_height="150dp"
+            android:layout_height="300dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
@@ -63,7 +63,7 @@
             android:textColor="@color/black"
             tools:text="Bandika Weaved at Style Style Star Salon at Ksh. 4,000"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/liker_profile_image"
+            app:layout_constraintStart_toEndOf="@+id/poster_profile_image"
             app:layout_constraintTop_toBottomOf="@+id/poster_profile_name" />
 
         <TextView
@@ -75,7 +75,7 @@
             tools:text="10.12.2020"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/liker_profile_image"
+            app:layout_constraintStart_toEndOf="@+id/poster_profile_image"
             app:layout_constraintTop_toBottomOf="@+id/style_description" />
 
         <ImageView

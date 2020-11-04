@@ -9,7 +9,7 @@
     android:padding="10dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/liker_profile_image"
+        android:id="@+id/poster_profile_image"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginStart="8dp"
@@ -44,7 +44,7 @@
         android:textColor="@color/white"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/liker_profile_image"
+        app:layout_constraintTop_toBottomOf="@+id/poster_profile_image"
         tools:text="Joel Kanyi" />
 
 

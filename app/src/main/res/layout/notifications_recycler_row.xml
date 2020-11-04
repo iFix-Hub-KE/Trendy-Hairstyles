@@ -13,7 +13,7 @@
         android:padding="15dp"
         android:layout_height="match_parent">
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/liker_profile_image"
+        android:id="@+id/poster_profile_image"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
@@ -33,8 +33,8 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/liker_profile_image"
-            app:layout_constraintTop_toTopOf="@+id/liker_profile_image"
+            app:layout_constraintStart_toEndOf="@+id/poster_profile_image"
+            app:layout_constraintTop_toTopOf="@+id/poster_profile_image"
             tools:text="Joel Kanyi liked your hairstyle on  10/12/2020 at 13:45.60 EAT" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
