@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -29,6 +30,7 @@ public class HomeFragment extends Fragment {
     RecyclerView recyclerView;
     private List<Post> postList;
     RecyclerView.Adapter adapter;
+    ProgressBar progressBar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,6 +38,7 @@ public class HomeFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         FloatingActionButton createPost = view.findViewById(R.id.add_post_fab);
+        progressBar = view.findViewById(R.id.recycler_progressbar);
 
         postList = new ArrayList<>();
 
@@ -53,6 +56,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void fetchPosts(View view){
+        progressBar.setVisibility(View.VISIBLE);
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("posts");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -61,6 +65,7 @@ public class HomeFragment extends Fragment {
                     for (DataSnapshot i: snapshot.getChildren()){
                         Post post = i.getValue(Post.class);
                         postList.add(post);
+                        progressBar.setVisibility(View.INVISIBLE);
                         initializeRecycler(view);
                     }
                 }
