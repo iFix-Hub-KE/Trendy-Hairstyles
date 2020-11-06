@@ -62,7 +62,7 @@ public class PostFragment extends Fragment {
         progressBar = view.findViewById(R.id.post_progressBar);
         chooseImage = view.findViewById(R.id.camera_to_choose_photo);
 
-        mStorageReference = FirebaseStorage.getInstance().getReference();
+        mStorageReference = FirebaseStorage.getInstance().getReference("posts_images");
         mDatabaseReference = FirebaseDatabase.getInstance().getReference("posts");
 
         chooseImage.setOnClickListener(v -> openFileChooser());
@@ -70,6 +70,7 @@ public class PostFragment extends Fragment {
 
         post_btn.setOnClickListener(v -> {
             Log.d(TAG, "onCreateView: post button clicked");
+            progressBar.setVisibility(View.VISIBLE);
             uploadImage();
         });
         return view;

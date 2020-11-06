@@ -52,8 +52,9 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(viewHolder.style_image);
         viewHolder.description.setText(post_list.getStyle_name()+" Weaved at "+post_list.getSalon_name()+" at KSh."+post_list.getStyle_price());
-        viewHolder.date_posted.setText(post_list.getDate_time()+(post_list.getCaption()));
+        viewHolder.date_posted.setText(post_list.getDate_time());
         viewHolder.likes.setText(post_list.getLikes());
+        viewHolder.caption.setText(post_list.getCaption());
     }
 
     @Override
@@ -66,6 +67,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         TextView poster_name;
         TextView description;
         TextView likes;
+        TextView caption;
         TextView date_posted;
         CircleImageView poster_prof_image;
         ImageView style_image;
@@ -78,6 +80,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             poster_prof_image = itemView.findViewById(R.id.poster_profile_image);
             style_image = itemView.findViewById(R.id.style_image);
             date_posted = itemView.findViewById(R.id.date_posted);
+            caption = itemView.findViewById(R.id.caption_txt);
         }
     }
 }

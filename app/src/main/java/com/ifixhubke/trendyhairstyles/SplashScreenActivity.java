@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class SplashScreenActivity extends AppCompatActivity {
 
     private static final String TAG = "SplashScreenActivity";
@@ -27,11 +29,19 @@ public class SplashScreenActivity extends AppCompatActivity {
             Log.d(TAG, "onCreate: connection"+ isConnected());
             showCustomDialog();
         }
+
         else {
             Handler handler = new Handler();
             handler.postDelayed(() -> {
                 startActivity(new Intent(SplashScreenActivity.this, SignInActivity.class));
-                finish();
+                if (FirebaseAuth.getInstance().getCurrentUser() !=null){
+                    startActivity(new Intent(SplashScreenActivity.this,MainActivity.class));
+                    finish();
+                }
+                else{
+                    startActivity(new Intent(SplashScreenActivity.this,SignInActivity.class));
+                    finish();
+                }
             },4000);
         }
 

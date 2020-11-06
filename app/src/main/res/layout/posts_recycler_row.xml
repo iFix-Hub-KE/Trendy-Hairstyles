@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    app:cardCornerRadius="15dp"
-    app:cardElevation="10dp">
+    app:cardCornerRadius="10dp"
+    app:cardElevation="7dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:padding="10dp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="10dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/poster_profile_image"
@@ -30,27 +30,30 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="8dp"
-            android:textColor="@color/black"
-            tools:text="Christine Wasike"
-            android:textStyle="bold"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/black"
             android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/poster_profile_image"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/poster_profile_image"
-            app:layout_constraintTop_toTopOf="@+id/poster_profile_image" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.258"
+            tools:text="Christine Wasike" />
 
         <ImageView
             android:id="@+id/style_image"
             android:layout_width="0dp"
             android:layout_height="300dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="8dp"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.578"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/date_posted"
+            app:layout_constraintTop_toBottomOf="@+id/caption_txt"
             tools:ignore="ContentDescription"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
@@ -58,13 +61,15 @@
             android:id="@+id/style_description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="8dp"
             android:textColor="@color/black"
-            tools:text="Bandika Weaved at Style Style Star Salon at Ksh. 4,000"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/poster_profile_image"
-            app:layout_constraintTop_toBottomOf="@+id/poster_profile_name" />
+            app:layout_constraintHorizontal_bias="0.684"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/poster_profile_image"
+            tools:text="Bandika Weaved at Style Style Star Salon at Ksh. 4,000" />
 
         <TextView
             android:id="@+id/date_posted"
@@ -72,11 +77,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="8dp"
-            tools:text="10.12.2020"
             android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/poster_profile_image"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/poster_profile_image"
-            app:layout_constraintTop_toBottomOf="@+id/style_description" />
+            app:layout_constraintTop_toBottomOf="@+id/poster_profile_name"
+            tools:text="10.12.2020" />
 
         <ImageView
             android:id="@+id/like_button"
@@ -93,22 +99,34 @@
             android:id="@+id/post_likes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="100"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="@+id/like_button"
             app:layout_constraintStart_toEndOf="@+id/like_button"
-            app:layout_constraintTop_toTopOf="@+id/like_button" />
+            app:layout_constraintTop_toTopOf="@+id/like_button"
+            tools:text="100" />
 
         <ImageView
             android:id="@+id/save_post"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginTop="5dp"
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/style_image"
             app:srcCompat="@drawable/ic_bookmark"
             tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/caption_txt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="8dp"
+            android:text="This hairstyle is awesome"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/style_description" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
