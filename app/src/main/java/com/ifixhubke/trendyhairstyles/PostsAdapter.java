@@ -48,11 +48,12 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         Picasso.get()
                 .load(post_list.getStyle_photo_url())
                 .fit()
-                .placeholder(R.drawable.ic_launcher_background)
                 .centerCrop()
+                .placeholder(R.drawable.ic_launcher_background)
                 .into(viewHolder.style_image);
         viewHolder.description.setText(post_list.getStyle_name()+" Weaved at "+post_list.getSalon_name()+" at KSh."+post_list.getStyle_price());
         viewHolder.date_posted.setText(post_list.getDate_time()+(post_list.getCaption()));
+        viewHolder.likes.setText(post_list.getLikes());
     }
 
     @Override
