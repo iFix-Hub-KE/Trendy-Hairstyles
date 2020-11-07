@@ -46,6 +46,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/poster_profile_image"
         tools:text="Joel Kanyi" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

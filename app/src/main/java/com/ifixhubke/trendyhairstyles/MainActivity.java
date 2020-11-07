@@ -7,7 +7,10 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -38,6 +41,8 @@ public class MainActivity extends AppCompatActivity  {
     TextView tv_name,tv_about;
 
     private static final String TAG = "MainActivity";
+    private String sharedPrefFile = "sharedpreference";
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +56,10 @@ public class MainActivity extends AppCompatActivity  {
         tv_name = headerView.findViewById(R.id.profile_name);
         tv_about = headerView.findViewById(R.id.profile_about);
 
-        //getSupportActionBar().hide();
+        sharedPreferences  = this.getSharedPreferences(sharedPrefFile, Context.MODE_PRIVATE);
+
+
+
         mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
@@ -112,6 +120,13 @@ public class MainActivity extends AppCompatActivity  {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String name = Objects.requireNonNull(dataSnapshot.child("full_names").getValue()).toString();
                 String about = Objects.requireNonNull(dataSnapshot.child("about_you").getValue()).toString();
+
+                SharedPref sharedPref = new SharedPref();
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString(sharedPref.username, sharedPreferences.getString(sharedPref.username,name));
+                editor.apply();
+                editor.commit();
+
                tv_name.setText(name);
                tv_about.setText(about);
                 Log.d(TAG, "onDataChange: "+name);

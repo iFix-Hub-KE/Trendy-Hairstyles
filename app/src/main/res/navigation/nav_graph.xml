@@ -14,7 +14,7 @@
             android:id="@+id/action_homeFragment_to_notificationsFragment"
             app:destination="@id/notificationsFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_postFragment2"
+            android:id="@+id/action_homeFragment_to_postFragment"
             app:destination="@id/postFragment" />
     </fragment>
     <fragment
@@ -54,9 +54,9 @@
         android:id="@+id/postFragment"
         android:name="com.ifixhubke.trendyhairstyles.PostFragment"
         android:label="Post"
-        tools:layout="@layout/fragment_post" >
-        <action
-            android:id="@+id/action_postFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+        tools:layout="@layout/fragment_post">
+        <argument
+            android:name="username"
+            app:argType="string" />
     </fragment>
 </navigation>

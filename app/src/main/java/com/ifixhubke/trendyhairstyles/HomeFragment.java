@@ -1,9 +1,12 @@
 package com.ifixhubke.trendyhairstyles;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavAction;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,6 +15,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -25,18 +30,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements ItemClickListener{
 
     RecyclerView recyclerView;
     private List<Post> postList;
-    RecyclerView.Adapter adapter;
+    PostsAdapter adapter;
     ProgressBar progressBar;
+    SharedPreferences sharedPreferences;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        sharedPreferences  = this.getActivity().getSharedPreferences("sharedpreference", Context.MODE_PRIVATE);
+        SharedPref sharedPref = new SharedPref();
+        String sharedValue = sharedPreferences.getString(sharedPref.username,"");
+
         FloatingActionButton createPost = view.findViewById(R.id.add_post_fab);
         progressBar = view.findViewById(R.id.recycler_progressbar);
 
@@ -44,14 +55,19 @@ public class HomeFragment extends Fragment {
 
         fetchPosts(view);
 
-        createPost.setOnClickListener(v -> NavHostFragment.findNavController(HomeFragment.this).navigate(R.id.action_homeFragment_to_postFragment2));
+        createPost.setOnClickListener(v ->{
+            TextView txt = view.findViewById(R.id.profile_name);
+            HomeFragmentDirections.ActionHomeFragmentToPostFragment action = HomeFragmentDirections.actionHomeFragmentToPostFragment(sharedValue);
+            NavHostFragment.findNavController(HomeFragment.this).navigate(action);
+        });
+
         return view;
     }
 
     private void initializeRecycler(View view){
         recyclerView = view.findViewById(R.id.posts_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new PostsAdapter(postList, getContext());
+        adapter = new PostsAdapter(postList, getContext(),this);
         recyclerView.setAdapter(adapter);
     }
 
@@ -74,5 +90,16 @@ public class HomeFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
+    }
+
+    @Override
+    public void likePost(Post post, int position) {
+        Toast.makeText(getContext(), "like post "+ post.getLikes(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void savePost(Post post, int position) {
+        Toast.makeText(getContext(), "saved post "+post.getStyle_photo_url() +" "+ post.getStyle_name() +" "+
+                post.getSalon_name() +" "+ post.getStyle_price(), Toast.LENGTH_LONG).show();
     }
 }

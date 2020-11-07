@@ -21,10 +21,12 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
     private List<Post> postsList;
     private Context context;
+    private ItemClickListener itemClickListener;
 
-    public PostsAdapter(List<Post> postsList, Context context) {
+    public PostsAdapter(List<Post> postsList, Context context, ItemClickListener itemClickListener) {
         this.postsList = postsList;
         this.context = context;
+        this.itemClickListener = itemClickListener;
     }
 
     @NonNull
@@ -55,6 +57,14 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         viewHolder.date_posted.setText(post_list.getDate_time());
         viewHolder.likes.setText(post_list.getLikes());
         viewHolder.caption.setText(post_list.getCaption());
+
+        viewHolder.like.setOnClickListener(v -> {
+            itemClickListener.likePost(postsList.get(i),i);
+        });
+
+        viewHolder.save.setOnClickListener(v -> {
+            itemClickListener.savePost(postsList.get(i),i);
+        });
     }
 
     @Override
@@ -71,6 +81,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         TextView date_posted;
         CircleImageView poster_prof_image;
         ImageView style_image;
+        ImageView like;
+        ImageView save;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -81,6 +93,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             style_image = itemView.findViewById(R.id.style_image);
             date_posted = itemView.findViewById(R.id.date_posted);
             caption = itemView.findViewById(R.id.caption_txt);
+            like = itemView.findViewById(R.id.like_button);
+            save = itemView.findViewById(R.id.save_post);
         }
     }
 }
