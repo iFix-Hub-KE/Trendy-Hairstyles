@@ -9,10 +9,10 @@ public class Post {
     private String caption;
     private String style_photo_url;
     private String date_time;
-    private String likes;
+    private int likes;
 
 
-    public Post(String user_name, String profile_image_url, String style_name, String style_price, String salon_name, String caption, String style_photo_url, String date_time, String likes) {
+    public Post(String user_name, String profile_image_url, String style_name, String style_price, String salon_name, String caption, String style_photo_url, String date_time, int likes) {
         this.user_name = user_name;
         this.profile_image_url = profile_image_url;
         this.style_name = style_name;
@@ -91,11 +91,11 @@ public class Post {
         this.date_time = date_time;
     }
 
-    public String getLikes() {
+    public int getLikes() {
         return likes;
     }
 
-    public void setLikes(String likes) {
+    public void setLikes(int likes) {
         this.likes = likes;
     }
 

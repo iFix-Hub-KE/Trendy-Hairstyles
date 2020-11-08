@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavAction;
 import androidx.navigation.fragment.NavHostFragment;
@@ -20,13 +21,16 @@ import android.widget.Toast;
 
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -37,6 +41,7 @@ public class HomeFragment extends Fragment implements ItemClickListener{
     PostsAdapter adapter;
     ProgressBar progressBar;
     SharedPreferences sharedPreferences;
+    DatabaseReference databaseReference;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -73,7 +78,7 @@ public class HomeFragment extends Fragment implements ItemClickListener{
 
     private void fetchPosts(View view){
         progressBar.setVisibility(View.VISIBLE);
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("posts");
+         databaseReference = FirebaseDatabase.getInstance().getReference("posts");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -86,15 +91,39 @@ public class HomeFragment extends Fragment implements ItemClickListener{
                     }
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
     }
 
     @Override
     public void likePost(Post post, int position) {
-        Toast.makeText(getContext(), "like post "+ post.getLikes(), Toast.LENGTH_SHORT).show();
+
+        int rt = post.getLikes()+1;
+        post.setLikes(rt);
+        Toast.makeText(getContext(), "like post "+rt, Toast.LENGTH_SHORT).show();
+
+        Query query = databaseReference.orderByChild("style_name").equalTo(post.getStyle_name());
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot mSnap : snapshot.getChildren()){
+                    mSnap.child("likes").getRef().setValue(rt);
+                    adapter.notifyDataSetChanged();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        //Toast.makeText(getContext(), "like post "+ post.getLikes(), Toast.LENGTH_SHORT).show();
     }
 
     @Override

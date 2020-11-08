@@ -10,7 +10,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TrendyHairstyles">
-        <activity android:name=".PostActivity"></activity>
         <activity
             android:name=".SignInActivity"
             android:theme="@style/Theme.Splash" />

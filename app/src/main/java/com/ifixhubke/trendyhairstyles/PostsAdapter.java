@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.like.LikeButton;
+import com.like.OnLikeListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -55,15 +57,35 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 .into(viewHolder.style_image);
         viewHolder.description.setText(post_list.getStyle_name()+" Weaved at "+post_list.getSalon_name()+" at KSh."+post_list.getStyle_price());
         viewHolder.date_posted.setText(post_list.getDate_time());
-        viewHolder.likes.setText(post_list.getLikes());
+        viewHolder.likes.setText(String.valueOf(post_list.getLikes()));
         viewHolder.caption.setText(post_list.getCaption());
 
-        viewHolder.like.setOnClickListener(v -> {
-            itemClickListener.likePost(postsList.get(i),i);
+        viewHolder.like.setOnLikeListener(new OnLikeListener() {
+            @Override
+            public void liked(LikeButton likeButton) {
+                itemClickListener.likePost(postsList.get(i),i);
+            }
+
+            @Override
+            public void unLiked(LikeButton likeButton) {
+                //itemClickListener.likePost(postsList.get(i),i);
+            }
         });
 
-        viewHolder.save.setOnClickListener(v -> {
-            itemClickListener.savePost(postsList.get(i),i);
+
+
+        viewHolder.save.setOnLikeListener(new OnLikeListener() {
+            @Override
+            public void liked(LikeButton likeButton) {
+                itemClickListener.savePost(postsList.get(i),i);
+                likeButton.setLikeDrawableRes(R.drawable.ic_save_on);
+            }
+
+            @Override
+            public void unLiked(LikeButton likeButton) {
+                itemClickListener.savePost(postsList.get(i),i);
+                likeButton.setUnlikeDrawableRes(R.drawable.ic_save_off);
+            }
         });
     }
 
@@ -81,8 +103,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         TextView date_posted;
         CircleImageView poster_prof_image;
         ImageView style_image;
-        ImageView like;
-        ImageView save;
+        LikeButton like;
+        LikeButton save;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

@@ -131,7 +131,7 @@ public class PostFragment extends Fragment {
                         Post post = new Post(username,
                                 "https://www.pinclipart.com/picdir/middle/157-1578186_user-profile-default-image-png-clipart.png",
                                 styleName.getText().toString(), price.getText().toString(),
-                                salon.getText().toString(), capt.getText().toString(), downloadURL, "12/12/2020 12:56:10 EAT", "100");
+                                salon.getText().toString(), capt.getText().toString(), downloadURL, "12/12/2020 12:56:10 EAT", 34);
 
                         mDatabaseReference.child(UUID.randomUUID().toString()).setValue(post)
                                 .addOnSuccessListener(unused -> {
