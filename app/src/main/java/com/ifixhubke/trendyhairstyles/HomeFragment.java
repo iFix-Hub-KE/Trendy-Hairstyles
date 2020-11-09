@@ -56,7 +56,7 @@ public class HomeFragment extends Fragment implements ItemClickListener{
         fetchPosts(view);
 
         createPost.setOnClickListener(v ->{
-
+            NavHostFragment.findNavController(HomeFragment.this).navigate(R.id.action_homeFragment_to_postFragment);
         });
 
         return view;
