@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.provider.MediaStore;
 import android.util.Log;
@@ -49,14 +50,14 @@ public class PostFragment extends Fragment {
     EditText price;
     EditText salon;
     Button post_btn;
-    String username;
     SharedPreferences sharedPreferences;
+    String sharedValue;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         sharedPreferences  = this.getActivity().getSharedPreferences("sharedPreferences", Context.MODE_PRIVATE);
-        String sharedValue = sharedPreferences.getString("USERNAME","");
+        sharedValue = sharedPreferences.getString("USERNAME","");
 
         Toast.makeText(getContext(), sharedValue, Toast.LENGTH_SHORT).show();
 
@@ -133,7 +134,7 @@ public class PostFragment extends Fragment {
                         String downloadURL = downloadUri.toString();
                         String mydate = java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
 
-                        Post post = new Post(username,
+                        Post post = new Post(sharedValue,
                                 "https://www.pinclipart.com/picdir/middle/157-1578186_user-profile-default-image-png-clipart.png",
                                 styleName.getText().toString(), price.getText().toString(),
                                 salon.getText().toString(), capt.getText().toString(), downloadURL, mydate, 0);
@@ -143,6 +144,7 @@ public class PostFragment extends Fragment {
                                     progressBar.setVisibility(View.INVISIBLE);
                                     Log.d(TAG, "onSuccess: the post was successful");
                                     Toast.makeText(getContext(), "Posted Successfully", Toast.LENGTH_SHORT).show();
+                                    NavHostFragment.findNavController(PostFragment.this).navigate(R.id.action_postFragment_to_homeFragment);
                                 }).addOnFailureListener(e -> {
                                     progressBar.setVisibility(View.INVISIBLE);
                                     Toast.makeText(getContext(), "Posted not Successful", Toast.LENGTH_SHORT).show();
