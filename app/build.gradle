@@ -71,4 +71,7 @@ dependencies {
 
     implementation 'com.github.jd-alexander:LikeButton:0.2.3'
 
+    implementation 'com.firebaseui:firebase-ui-database:6.4.0'
+
+
 }
