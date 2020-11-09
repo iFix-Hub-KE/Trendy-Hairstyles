@@ -39,9 +39,10 @@ public class MainActivity extends AppCompatActivity  {
     NavController navController;
     Toolbar mToolbar;
     TextView tv_name,tv_about;
+    String name;
 
     private static final String TAG = "MainActivity";
-    private String sharedPrefFile = "sharedpreference";
+    private String sharedPrefFile = "sharedPreferences";
     private SharedPreferences sharedPreferences;
 
     @Override
@@ -118,14 +119,14 @@ public class MainActivity extends AppCompatActivity  {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String name = Objects.requireNonNull(dataSnapshot.child("full_names").getValue()).toString();
+                name = Objects.requireNonNull(dataSnapshot.child("full_names").getValue()).toString();
                 String about = Objects.requireNonNull(dataSnapshot.child("about_you").getValue()).toString();
 
-                SharedPref sharedPref = new SharedPref();
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString(sharedPref.username, sharedPreferences.getString(sharedPref.username,name));
+                editor.putString("USERNAME",name);
                 editor.apply();
                 editor.commit();
+                Toast.makeText(MainActivity.this, sharedPreferences.getString("USERNAME","default"), Toast.LENGTH_SHORT).show();
 
                tv_name.setText(name);
                tv_about.setText(about);

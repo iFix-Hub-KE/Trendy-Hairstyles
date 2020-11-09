@@ -11,20 +11,25 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.like.LikeButton;
+import com.like.OnLikeListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> {
 
-    private List<Post> postsList;
+    private ArrayList<Post> postsList;
     private Context context;
+    private ItemClickListener itemClickListener;
 
-    public PostsAdapter(List<Post> postsList, Context context) {
+    public PostsAdapter(ArrayList<Post> postsList, Context context, ItemClickListener itemClickListener) {
         this.postsList = postsList;
         this.context = context;
+        this.itemClickListener = itemClickListener;
     }
 
     @NonNull
@@ -53,8 +58,36 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 .into(viewHolder.style_image);
         viewHolder.description.setText(post_list.getStyle_name()+" Weaved at "+post_list.getSalon_name()+" at KSh."+post_list.getStyle_price());
         viewHolder.date_posted.setText(post_list.getDate_time());
-        viewHolder.likes.setText(post_list.getLikes());
+        viewHolder.likes.setText(String.valueOf(post_list.getLikes()));
         viewHolder.caption.setText(post_list.getCaption());
+
+        viewHolder.like.setOnLikeListener(new OnLikeListener() {
+            @Override
+            public void liked(LikeButton likeButton) {
+                itemClickListener.likePost(postsList.get(i),i);
+            }
+
+            @Override
+            public void unLiked(LikeButton likeButton) {
+                //itemClickListener.likePost(postsList.get(i),i);
+            }
+        });
+
+
+
+        viewHolder.save.setOnLikeListener(new OnLikeListener() {
+            @Override
+            public void liked(LikeButton likeButton) {
+                itemClickListener.savePost(postsList.get(i),i);
+                likeButton.setLikeDrawableRes(R.drawable.ic_save_on);
+            }
+
+            @Override
+            public void unLiked(LikeButton likeButton) {
+                itemClickListener.savePost(postsList.get(i),i);
+                likeButton.setUnlikeDrawableRes(R.drawable.ic_save_off);
+            }
+        });
     }
 
     @Override
@@ -71,6 +104,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         TextView date_posted;
         CircleImageView poster_prof_image;
         ImageView style_image;
+        LikeButton like;
+        LikeButton save;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -81,6 +116,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             style_image = itemView.findViewById(R.id.style_image);
             date_posted = itemView.findViewById(R.id.date_posted);
             caption = itemView.findViewById(R.id.caption_txt);
+            like = itemView.findViewById(R.id.like_button);
+            save = itemView.findViewById(R.id.save_post);
         }
     }
 }

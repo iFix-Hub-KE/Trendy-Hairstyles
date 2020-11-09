@@ -1,6 +1,8 @@
 package com.ifixhubke.trendyhairstyles;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -26,6 +28,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -47,15 +50,15 @@ public class PostFragment extends Fragment {
     EditText salon;
     Button post_btn;
     String username;
+    SharedPreferences sharedPreferences;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        PostFragmentArgs args = PostFragmentArgs.fromBundle(getArguments());
+        sharedPreferences  = this.getActivity().getSharedPreferences("sharedPreferences", Context.MODE_PRIVATE);
+        String sharedValue = sharedPreferences.getString("USERNAME","");
 
-        Toast.makeText(getContext(), args.getUsername(), Toast.LENGTH_SHORT).show();
-        username = args.getUsername();
+        Toast.makeText(getContext(), sharedValue, Toast.LENGTH_SHORT).show();
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_post, container, false);
@@ -128,10 +131,12 @@ public class PostFragment extends Fragment {
                         Uri downloadUri = task.getResult();
                         assert downloadUri != null;
                         String downloadURL = downloadUri.toString();
+                        String mydate = java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
+
                         Post post = new Post(username,
                                 "https://www.pinclipart.com/picdir/middle/157-1578186_user-profile-default-image-png-clipart.png",
                                 styleName.getText().toString(), price.getText().toString(),
-                                salon.getText().toString(), capt.getText().toString(), downloadURL, "12/12/2020 12:56:10 EAT", 34);
+                                salon.getText().toString(), capt.getText().toString(), downloadURL, mydate, 0);
 
                         mDatabaseReference.child(UUID.randomUUID().toString()).setValue(post)
                                 .addOnSuccessListener(unused -> {

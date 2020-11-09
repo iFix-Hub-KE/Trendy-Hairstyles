@@ -55,8 +55,5 @@
         android:name="com.ifixhubke.trendyhairstyles.PostFragment"
         android:label="Post"
         tools:layout="@layout/fragment_post">
-        <argument
-            android:name="username"
-            app:argType="string" />
     </fragment>
 </navigation>

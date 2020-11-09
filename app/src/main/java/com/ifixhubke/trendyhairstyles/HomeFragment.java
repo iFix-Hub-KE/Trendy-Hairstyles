@@ -37,10 +37,9 @@ import java.util.List;
 public class HomeFragment extends Fragment implements ItemClickListener{
 
     RecyclerView recyclerView;
-    private List<Post> postList;
+    private ArrayList<Post> postList;
     PostsAdapter adapter;
     ProgressBar progressBar;
-    SharedPreferences sharedPreferences;
     DatabaseReference databaseReference;
 
     @Override
@@ -48,10 +47,6 @@ public class HomeFragment extends Fragment implements ItemClickListener{
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-
-        sharedPreferences  = this.getActivity().getSharedPreferences("sharedpreference", Context.MODE_PRIVATE);
-        SharedPref sharedPref = new SharedPref();
-        String sharedValue = sharedPreferences.getString(sharedPref.username,"");
 
         FloatingActionButton createPost = view.findViewById(R.id.add_post_fab);
         progressBar = view.findViewById(R.id.recycler_progressbar);
@@ -61,9 +56,7 @@ public class HomeFragment extends Fragment implements ItemClickListener{
         fetchPosts(view);
 
         createPost.setOnClickListener(v ->{
-            TextView txt = view.findViewById(R.id.profile_name);
-            HomeFragmentDirections.ActionHomeFragmentToPostFragment action = HomeFragmentDirections.actionHomeFragmentToPostFragment(sharedValue);
-            NavHostFragment.findNavController(HomeFragment.this).navigate(action);
+
         });
 
         return view;
@@ -83,6 +76,7 @@ public class HomeFragment extends Fragment implements ItemClickListener{
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
+                    postList.clear();
                     for (DataSnapshot i: snapshot.getChildren()){
                         Post post = i.getValue(Post.class);
                         postList.add(post);
