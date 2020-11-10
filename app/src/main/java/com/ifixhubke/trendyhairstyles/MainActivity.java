@@ -11,10 +11,13 @@ import androidx.navigation.ui.NavigationUI;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,7 +31,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
+
 import java.util.Objects;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity  {
 
@@ -40,6 +48,9 @@ public class MainActivity extends AppCompatActivity  {
     Toolbar mToolbar;
     TextView tv_name,tv_about;
     String name;
+    String profileURL;
+    String about;
+    CircleImageView profileImage;
 
     private static final String TAG = "MainActivity";
     private String sharedPrefFile = "sharedPreferences";
@@ -56,6 +67,7 @@ public class MainActivity extends AppCompatActivity  {
         View headerView = mNavigationView.getHeaderView(0);
         tv_name = headerView.findViewById(R.id.profile_name);
         tv_about = headerView.findViewById(R.id.profile_about);
+        profileImage = headerView.findViewById(R.id.poster_profile_image);
 
         sharedPreferences  = this.getSharedPreferences(sharedPrefFile, Context.MODE_PRIVATE);
 
@@ -120,17 +132,26 @@ public class MainActivity extends AppCompatActivity  {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 name = Objects.requireNonNull(dataSnapshot.child("full_names").getValue()).toString();
-                String about = Objects.requireNonNull(dataSnapshot.child("about_you").getValue()).toString();
+                about = Objects.requireNonNull(dataSnapshot.child("about_you").getValue()).toString();
+                profileURL = Objects.requireNonNull(dataSnapshot.child("profile_url").getValue()).toString();
 
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("USERNAME",name);
+                editor.putString("PROFILE_URL",profileURL);
+                editor.putString("ABOUT",about);
                 editor.apply();
                 editor.commit();
                 Toast.makeText(MainActivity.this, sharedPreferences.getString("USERNAME","default"), Toast.LENGTH_SHORT).show();
 
-               tv_name.setText(name);
-               tv_about.setText(about);
-                Log.d(TAG, "onDataChange: "+name);
+               tv_name.setText(sharedPreferences.getString("USERNAME","default"));
+               tv_about.setText(sharedPreferences.getString("ABOUT","default"));
+                Picasso.get()
+                        .load(sharedPreferences.getString("PROFILE_URL","default"))
+                        .placeholder(R.drawable.ic_profile_user)
+                        .fit()
+                        .centerCrop()
+                        .into(profileImage);
+                Log.d(TAG, "onDataChange: "+name+ " "+profileURL);
             }
 
             @Override
@@ -140,3 +161,4 @@ public class MainActivity extends AppCompatActivity  {
     }
 
 }
+

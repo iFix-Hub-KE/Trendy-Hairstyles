@@ -51,15 +51,16 @@ public class PostFragment extends Fragment {
     EditText salon;
     Button post_btn;
     SharedPreferences sharedPreferences;
-    String sharedValue;
+    String sharedProfileName,sharedProfilePicture;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         sharedPreferences  = this.getActivity().getSharedPreferences("sharedPreferences", Context.MODE_PRIVATE);
-        sharedValue = sharedPreferences.getString("USERNAME","");
+        sharedProfileName = sharedPreferences.getString("USERNAME","");
+        sharedProfilePicture = sharedPreferences.getString("PROFILE_URL","");
 
-        Toast.makeText(getContext(), sharedValue, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), sharedProfileName, Toast.LENGTH_SHORT).show();
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_post, container, false);
@@ -134,8 +135,8 @@ public class PostFragment extends Fragment {
                         String downloadURL = downloadUri.toString();
                         String mydate = java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
 
-                        Post post = new Post(sharedValue,
-                                "https://www.pinclipart.com/picdir/middle/157-1578186_user-profile-default-image-png-clipart.png",
+                        Post post = new Post(sharedProfileName,
+                                sharedProfilePicture,
                                 styleName.getText().toString(), price.getText().toString(),
                                 salon.getText().toString(), capt.getText().toString(), downloadURL, mydate, 0);
 
