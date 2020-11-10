@@ -31,6 +31,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -73,7 +75,7 @@ public class HomeFragment extends Fragment implements ItemClickListener{
     private void fetchPosts(View view){
         progressBar.setVisibility(View.VISIBLE);
          databaseReference = FirebaseDatabase.getInstance().getReference("posts");
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        databaseReference.orderByChild("date_time").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
@@ -81,6 +83,9 @@ public class HomeFragment extends Fragment implements ItemClickListener{
                     for (DataSnapshot i: snapshot.getChildren()){
                         Post post = i.getValue(Post.class);
                         postList.add(post);
+
+                        //to reverse the list coz firebase sorts data in ascending order
+                        Collections.reverse(postList);
                         progressBar.setVisibility(View.INVISIBLE);
                         initializeRecycler(view);
                     }
