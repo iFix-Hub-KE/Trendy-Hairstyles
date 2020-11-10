@@ -48,8 +48,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         Picasso.get()
                 .load(post_list.getProfile_image_url())
                 .fit()
-                .placeholder(R.drawable.ic_profile_user)
                 .centerCrop()
+                .placeholder(R.drawable.ic_profile_user)
                 .into(viewHolder.poster_prof_image);
         Picasso.get()
                 .load(post_list.getStyle_photo_url())
@@ -70,7 +70,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
             @Override
             public void unLiked(LikeButton likeButton) {
-                //itemClickListener.likePost(postsList.get(i),i);
+                itemClickListener.dislikePost(postsList.get(i),i);
             }
         });
 

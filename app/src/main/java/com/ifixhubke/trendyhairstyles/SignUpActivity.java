@@ -120,10 +120,9 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void saveUserDetails(String name,String email, String about,String imageUrl) {
-        Log.d(TAG, "onActivityResult: the url for the image"+imageUrl.toString());
+        Log.d(TAG, "onActivityResult: the url for the image"+imageUrl);
                         User user = new User(name, email, about,imageUrl);
                         mDatabaseReference.child(userID).setValue(user);
-                        //progressBar.setVisibility(View.INVISIBLE);
                         Log.d(TAG, "onSuccess: the sign up was successful");
                         Toast.makeText(this, "Created Successfully", Toast.LENGTH_SHORT).show();
     }

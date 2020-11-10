@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -121,8 +122,38 @@ public class HomeFragment extends Fragment implements ItemClickListener{
     }
 
     @Override
+    public void dislikePost(Post post, int position) {
+        int rt = post.getLikes()-1;
+        post.setLikes(rt);
+        Toast.makeText(getContext(), "disliked post "+rt, Toast.LENGTH_SHORT).show();
+
+        Query query = databaseReference.orderByChild("style_name").equalTo(post.getStyle_name());
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot mSnap : snapshot.getChildren()){
+                    mSnap.child("likes").getRef().setValue(rt);
+                    adapter.notifyDataSetChanged();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    @Override
     public void savePost(Post post, int position) {
         Toast.makeText(getContext(), "saved post "+post.getStyle_photo_url() +" "+ post.getStyle_name() +" "+
                 post.getSalon_name() +" "+ post.getStyle_price(), Toast.LENGTH_LONG).show();
+        databaseReference = FirebaseDatabase.getInstance().getReference("saved");
+        Saved saved = new Saved(post.getStyle_photo_url(),post.getStyle_name(),post.getStyle_price(),post.getSalon_name(), true);
+        String userID = FirebaseAuth.getInstance().getUid();
+        databaseReference.child(userID).setValue(saved);
+        Toast.makeText(getContext(), "Style Saved", Toast.LENGTH_SHORT).show();
+
     }
 }
