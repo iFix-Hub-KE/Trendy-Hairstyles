@@ -22,11 +22,11 @@ public class Saved {
         return styleImage;
     }
 
-    public Boolean getIsSaved(){
+    public Boolean getIsSaved() {
         return isSaved;
     }
 
-    public void setIsSaved(Boolean isSaved){
+    public void setIsSaved(Boolean isSaved) {
         this.isSaved = isSaved;
     }
 

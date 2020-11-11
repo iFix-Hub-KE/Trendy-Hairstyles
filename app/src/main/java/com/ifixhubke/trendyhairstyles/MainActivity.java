@@ -11,17 +11,15 @@ import androidx.navigation.ui.NavigationUI;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.widget.Toolbar;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,29 +29,22 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity {
 
-    DrawerLayout mDrawer;
-    NavigationView mNavigationView;
-    BottomNavigationView mBottomNavigationView;
-    AppBarConfiguration appBarConfiguration;
-    NavController navController;
-    Toolbar mToolbar;
-    TextView tv_name,tv_about;
-    String name;
-    String profileURL;
-    String about;
-    CircleImageView profileImage;
-
+    private AppBarConfiguration appBarConfiguration;
+    private NavController navController;
+    private TextView tv_name, tv_about;
+    private String name;
+    private String profileURL;
+    private String about;
+    private CircleImageView profileImage;
     private static final String TAG = "MainActivity";
-    private String sharedPrefFile = "sharedPreferences";
     private SharedPreferences sharedPreferences;
 
     @Override
@@ -61,19 +52,19 @@ public class MainActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mBottomNavigationView = findViewById(R.id.bottomNavigationView);
-        mDrawer = findViewById(R.id.drawerLayout);
-        mNavigationView = findViewById(R.id.navigationView);
+        BottomNavigationView mBottomNavigationView = findViewById(R.id.bottomNavigationView);
+        DrawerLayout mDrawer = findViewById(R.id.drawerLayout);
+        NavigationView mNavigationView = findViewById(R.id.navigationView);
         View headerView = mNavigationView.getHeaderView(0);
         tv_name = headerView.findViewById(R.id.profile_name);
         tv_about = headerView.findViewById(R.id.profile_about);
         profileImage = headerView.findViewById(R.id.poster_profile_image);
 
-        sharedPreferences  = this.getSharedPreferences(sharedPrefFile, Context.MODE_PRIVATE);
+        String sharedPrefFile = "sharedPreferences";
+        sharedPreferences = this.getSharedPreferences(sharedPrefFile, Context.MODE_PRIVATE);
 
 
-
-        mToolbar = findViewById(R.id.toolbar);
+        Toolbar mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
         //Switch for Dark Mode
@@ -84,7 +75,7 @@ public class MainActivity extends AppCompatActivity  {
 
         ((Switch) mNavigationView.getMenu().findItem(R.id.nav_dark_mode).getActionView())
                 .setOnCheckedChangeListener((buttonView, isChecked) -> {
-                    if(isChecked) {
+                    if (isChecked) {
                         Toast.makeText(MainActivity.this, "Dark Mode Enabled", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(MainActivity.this, "Dark Mode Disabled", Toast.LENGTH_SHORT).show();
@@ -96,12 +87,12 @@ public class MainActivity extends AppCompatActivity  {
         //Setup Bottom Navigation View
         NavigationUI.setupWithNavController(mBottomNavigationView, navController);
 
-       //Setup Top Back post_style_button
+        //Setup Top Back post_style_button
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).setOpenableLayout(mDrawer).build();
-        NavigationUI.setupActionBarWithNavController(this,navController,mDrawer);
+        NavigationUI.setupActionBarWithNavController(this, navController, mDrawer);
 
         //Setup Navigation Drawer
-        NavigationUI.setupWithNavController(mNavigationView,navController);
+        NavigationUI.setupWithNavController(mNavigationView, navController);
 
         fetchUserProfile();
 
@@ -110,7 +101,7 @@ public class MainActivity extends AppCompatActivity  {
         logout.setOnMenuItemClickListener(item -> {
             FirebaseAuth.getInstance().signOut();
             Toast.makeText(MainActivity.this, "Logged out succesfully!", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(MainActivity.this,SignInActivity.class));
+            startActivity(new Intent(MainActivity.this, SignInActivity.class));
             finish();
             return true;
         });
@@ -118,7 +109,7 @@ public class MainActivity extends AppCompatActivity  {
 
     @Override
     public boolean onSupportNavigateUp() {
-        return NavigationUI.navigateUp(navController,appBarConfiguration);
+        return NavigationUI.navigateUp(navController, appBarConfiguration);
     }
 
     private void fetchUserProfile() {
@@ -136,22 +127,20 @@ public class MainActivity extends AppCompatActivity  {
                 profileURL = Objects.requireNonNull(dataSnapshot.child("profile_url").getValue()).toString();
 
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("USERNAME",name);
-                editor.putString("PROFILE_URL",profileURL);
-                editor.putString("ABOUT",about);
+                editor.putString("USERNAME", name);
+                editor.putString("PROFILE_URL", profileURL);
+                editor.putString("ABOUT", about);
                 editor.apply();
                 editor.commit();
-                Toast.makeText(MainActivity.this, sharedPreferences.getString("USERNAME","default"), Toast.LENGTH_SHORT).show();
 
-               tv_name.setText(sharedPreferences.getString("USERNAME","default"));
-               tv_about.setText(sharedPreferences.getString("ABOUT","default"));
+                tv_name.setText(sharedPreferences.getString("USERNAME", "default"));
+                tv_about.setText(sharedPreferences.getString("ABOUT", "default"));
                 Picasso.get()
-                        .load(sharedPreferences.getString("PROFILE_URL","default"))
+                        .load(sharedPreferences.getString("PROFILE_URL", "default"))
                         .placeholder(R.drawable.ic_profile_user)
                         .fit()
                         .centerCrop()
                         .into(profileImage);
-                Log.d(TAG, "onDataChange: "+name+ " "+profileURL);
             }
 
             @Override
@@ -159,6 +148,5 @@ public class MainActivity extends AppCompatActivity  {
             }
         });
     }
-
 }
 

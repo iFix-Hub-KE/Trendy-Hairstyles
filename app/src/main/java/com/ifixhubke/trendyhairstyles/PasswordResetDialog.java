@@ -9,7 +9,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import androidx.fragment.app.DialogFragment;
+
 import com.google.firebase.auth.FirebaseAuth;
 
 public class PasswordResetDialog extends DialogFragment {
@@ -18,14 +20,14 @@ public class PasswordResetDialog extends DialogFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.forgot_password, container, false);
+        View view = inflater.inflate(R.layout.forgot_password, container, false);
         mEmail = view.findViewById(R.id.reset_mail);
         Button mConfirm = view.findViewById(R.id.txt_confirm);
         mContext = getActivity();
 
         mConfirm.setOnClickListener(v -> {
 
-            if (!(TextUtils.isEmpty(mEmail.getText().toString()))){
+            if (!(TextUtils.isEmpty(mEmail.getText().toString()))) {
                 sendPasswordResetEmail(mEmail.getText().toString());
             }
         });

@@ -19,7 +19,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/credentials_card"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="220dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         app:cardCornerRadius="16dp"
@@ -112,6 +112,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/forgot_password"
         android:textColor="@color/black"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/create_account" />

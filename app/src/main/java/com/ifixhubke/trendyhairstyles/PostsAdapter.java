@@ -1,12 +1,11 @@
 package com.ifixhubke.trendyhairstyles;
 
-import android.content.Context;
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,35 +15,31 @@ import com.like.OnLikeListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> {
 
-    private ArrayList<Post> postsList;
-    private Context context;
-    private ItemClickListener itemClickListener;
+    private final ArrayList<Post> postsList;
+    private final ItemClickListener itemClickListener;
 
-    public PostsAdapter(ArrayList<Post> postsList, Context context, ItemClickListener itemClickListener) {
+    public PostsAdapter(ArrayList<Post> postsList, ItemClickListener itemClickListener) {
         this.postsList = postsList;
-        this.context = context;
         this.itemClickListener = itemClickListener;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.posts_recycler_row,viewGroup,false);
-        ViewHolder viewHolder = new ViewHolder(view);
-        return  viewHolder;
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.posts_recycler_row, viewGroup, false);
+        return new ViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         final Post post_list = postsList.get(i);
 
-        viewHolder.poster_name.setText(post_list.getUser_name());
         Picasso.get()
                 .load(post_list.getProfile_image_url())
                 .fit()
@@ -57,7 +52,9 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 .centerCrop()
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(viewHolder.style_image);
-        viewHolder.description.setText(post_list.getStyle_name()+" Weaved at "+post_list.getSalon_name()+" at KSh."+post_list.getStyle_price());
+
+        viewHolder.poster_name.setText(post_list.getUser_name());
+        viewHolder.description.setText(post_list.getStyle_name() + " Weaved at " + post_list.getSalon_name() + " at KSh." + post_list.getStyle_price());
         viewHolder.date_posted.setText(post_list.getDate_time());
         viewHolder.likes.setText(String.valueOf(post_list.getLikes()));
         viewHolder.caption.setText(post_list.getCaption());
@@ -65,27 +62,26 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         viewHolder.like.setOnLikeListener(new OnLikeListener() {
             @Override
             public void liked(LikeButton likeButton) {
-                itemClickListener.likePost(postsList.get(i),i);
+                itemClickListener.likePost(postsList.get(i), i);
             }
 
             @Override
             public void unLiked(LikeButton likeButton) {
-                itemClickListener.dislikePost(postsList.get(i),i);
+                itemClickListener.dislikePost(postsList.get(i), i);
             }
         });
-
 
 
         viewHolder.save.setOnLikeListener(new OnLikeListener() {
             @Override
             public void liked(LikeButton likeButton) {
-                itemClickListener.savePost(postsList.get(i),i);
+                itemClickListener.savePost(postsList.get(i), i);
                 likeButton.setLikeDrawableRes(R.drawable.ic_save_on);
             }
 
             @Override
             public void unLiked(LikeButton likeButton) {
-                itemClickListener.savePost(postsList.get(i),i);
+                itemClickListener.savePost(postsList.get(i), i);
                 likeButton.setUnlikeDrawableRes(R.drawable.ic_save_off);
             }
         });
@@ -96,7 +92,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         return postsList.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
+    static class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView poster_name;
         TextView description;

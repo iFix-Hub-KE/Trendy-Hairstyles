@@ -2,16 +2,13 @@ package com.ifixhubke.trendyhairstyles;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-
 import com.google.firebase.auth.FirebaseAuth;
 
 public class SplashScreenActivity extends AppCompatActivity {
@@ -23,10 +20,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
-        Log.d(TAG, "onCreate: view");
-
         if(!isConnected()){
-            Log.d(TAG, "onCreate: connection"+ isConnected());
             showCustomDialog();
         }
 
@@ -36,12 +30,11 @@ public class SplashScreenActivity extends AppCompatActivity {
                 startActivity(new Intent(SplashScreenActivity.this, SignInActivity.class));
                 if (FirebaseAuth.getInstance().getCurrentUser() !=null){
                     startActivity(new Intent(SplashScreenActivity.this,MainActivity.class));
-                    finish();
                 }
                 else{
                     startActivity(new Intent(SplashScreenActivity.this,SignInActivity.class));
-                    finish();
                 }
+                finish();
             },4000);
         }
 
@@ -52,12 +45,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(SplashScreenActivity.this);
         alertDialogBuilder.setMessage("It seems you are not connect to the Internet, please turn on WIFI or Mobile Data");
         alertDialogBuilder.setCancelable(false);
-        alertDialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                finish();
-            }
-        });
+        alertDialogBuilder.setPositiveButton("Ok", (dialog, which) -> finish());
         alertDialogBuilder.show();
     }
 
