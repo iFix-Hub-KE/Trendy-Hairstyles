@@ -44,7 +44,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 .load(post_list.getProfile_image_url())
                 .fit()
                 .centerCrop()
-                .placeholder(R.drawable.ic_profile_user)
+                .placeholder(R.drawable.ic_launcher_background)
                 .into(viewHolder.poster_prof_image);
         Picasso.get()
                 .load(post_list.getStyle_photo_url())

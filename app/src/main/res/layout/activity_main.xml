@@ -43,7 +43,6 @@
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationView"
-        app:itemIconTint="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         app:headerLayout="@layout/header"

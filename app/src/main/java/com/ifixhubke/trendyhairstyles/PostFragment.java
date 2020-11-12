@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -74,6 +76,24 @@ public class PostFragment extends Fragment {
         chooseImage.setOnClickListener(v -> openFileChooser());
 
         post_btn.setOnClickListener(v -> {
+            if (TextUtils.isEmpty(salon.getText().toString())) {
+                salon.setError("Please enter a salon");
+                return;
+            }
+            if (TextUtils.isEmpty(price.getText().toString())) {
+                price.setError("Please enter price of the style");
+                return;
+            }
+            if (TextUtils.isEmpty(styleName.getText().toString())) {
+                styleName.setError("Please enter style name");
+                return;
+            }
+            if (imageURI==null){
+                Snackbar.make(view.findViewById(R.id.contrt),"Please Choose a picture to share",
+                        Snackbar.LENGTH_SHORT)
+                        .show();
+                return;
+            }
             progressBar.setVisibility(View.VISIBLE);
             uploadImage();
         });
