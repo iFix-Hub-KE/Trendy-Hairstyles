@@ -43,13 +43,13 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         Picasso.get()
                 .load(post_list.getProfile_image_url())
                 .fit()
-                .centerCrop()
+                .centerInside()
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(viewHolder.poster_prof_image);
         Picasso.get()
                 .load(post_list.getStyle_photo_url())
                 .fit()
-                .centerCrop()
+                .centerInside()
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(viewHolder.style_image);
 
@@ -63,11 +63,13 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             @Override
             public void liked(LikeButton likeButton) {
                 itemClickListener.likePost(postsList.get(i), i);
+                likeButton.setLikeDrawableRes(R.drawable.ic_like_love_on);
             }
 
             @Override
             public void unLiked(LikeButton likeButton) {
                 itemClickListener.dislikePost(postsList.get(i), i);
+                likeButton.setLikeDrawableRes(R.drawable.ic_like_love_off);
             }
         });
 
