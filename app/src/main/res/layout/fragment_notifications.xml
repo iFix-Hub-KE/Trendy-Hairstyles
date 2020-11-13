@@ -9,7 +9,6 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/notifications_recyclerview"
-        tools:listitem="@layout/notifications_recycler_row"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"

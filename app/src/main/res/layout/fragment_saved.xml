@@ -8,7 +8,6 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/saved_recyclerview"
-        tools:listitem="@layout/saved_recycler_row"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
