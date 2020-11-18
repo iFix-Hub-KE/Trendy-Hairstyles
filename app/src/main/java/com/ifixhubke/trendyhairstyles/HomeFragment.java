@@ -136,10 +136,12 @@ public class HomeFragment extends Fragment implements ItemClickListener {
         assert userID != null;
         databaseReference.child(userID).setValue(saved);
         Toast.makeText(getContext(), "Style Saved", Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
     public void unSavePost(Post post, int position) {
 
     }
+
 }
