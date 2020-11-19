@@ -32,40 +32,20 @@ public class SavedFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_saved,container,false);
+        View view = inflater.inflate(R.layout.fragment_saved, container, false);
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("saved");
 
         savedList = new ArrayList<>();
 
-        fetchPosts(view);
-
-        // Inflate the layout for this fragment
-        return view;
-    }
-
-    public void initializeRecycler(View view){
-
-        RecyclerView recyclerView = view.findViewById(R.id.saved_recyclerview);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        savedAdapter = new SavedAdapter(savedList);
-        recyclerView.setAdapter(savedAdapter);
-
-    }
-
-    private void fetchPosts(View view){
-
-        databaseReference = FirebaseDatabase.getInstance().getReference("posts");
-        databaseReference.orderByChild("date_time").addValueEventListener(new ValueEventListener() {
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
-                    savedList.clear();
-                    for (DataSnapshot i:snapshot.getChildren()){
-                        Saved saved = i.getValue(Saved.class);
-                        savedList.add(saved);
+                for (DataSnapshot i : snapshot.getChildren()) {
+                    Saved saved = i.getValue(Saved.class);
+                    savedList.add(saved);
 
-                        Collections.reverse(savedList);
-                        initializeRecycler(view);
-                    }
+                    initializeRecycler(view);
                 }
             }
 
@@ -74,7 +54,14 @@ public class SavedFragment extends Fragment {
 
             }
         });
+        return view;
+    }
 
+    private void initializeRecycler(View view) {
+        RecyclerView recyclerView = view.findViewById(R.id.saved_recyclerview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        savedAdapter = new SavedAdapter(savedList);
+        recyclerView.setAdapter(savedAdapter);
     }
 
 }

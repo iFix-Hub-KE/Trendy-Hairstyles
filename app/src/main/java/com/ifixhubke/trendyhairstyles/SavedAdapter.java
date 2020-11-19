@@ -25,24 +25,27 @@ public class SavedAdapter extends RecyclerView.Adapter<SavedAdapter.ViewHolder> 
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.saved_recycler_row,parent,false);
-        return new ViewHolder(view);
+        ViewHolder viewHolder = new ViewHolder(view);
+        return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        final Saved saved_list = savedList.get(position);
+        Saved saved_list = savedList.get(position);
+
+        holder.style_salon_weaved.setText(saved_list.getSalonName());
+        holder.style_name.setText(saved_list.getStyleName());
+        holder.style_price.setText(saved_list.getStylePrice());
 
         Picasso.get()
                 .load(saved_list.getStyleImage())
                 .fit()
                 .centerCrop()
-                .placeholder(R.drawable.ic_launcher_background)
+                .placeholder(R.drawable.loading)
                 .into(holder.style_image);
 
-        holder.style_name.setText(saved_list.getStyleName());
-        holder.style_price.setText(saved_list.getStylePrice());
-        holder.style_salon_weaved.setText(saved_list.getSalonName());
+
 
     }
 
