@@ -50,7 +50,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 .load(post_list.getStyle_photo_url())
                 .fit()
                 .centerInside()
-                .placeholder(R.drawable.ic_launcher_background)
+                .placeholder(R.drawable.loading)
                 .into(viewHolder.style_image);
 
         viewHolder.poster_name.setText(post_list.getUser_name());
