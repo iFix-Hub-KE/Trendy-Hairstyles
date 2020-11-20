@@ -41,7 +41,7 @@ public class SavedAdapter extends RecyclerView.Adapter<SavedAdapter.ViewHolder> 
         Picasso.get()
                 .load(saved_list.getStyleImage())
                 .fit()
-                .centerCrop()
+                .centerInside()
                 .placeholder(R.drawable.loading)
                 .into(holder.style_image);
 
@@ -65,8 +65,8 @@ public class SavedAdapter extends RecyclerView.Adapter<SavedAdapter.ViewHolder> 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            style_name = itemView.findViewById(R.id.style_name);
-            style_price = itemView.findViewById(R.id.style_price);
+            style_name = itemView.findViewById(R.id.saved_style_name);
+            style_price = itemView.findViewById(R.id.saved_style_price);
             style_salon_weaved = itemView.findViewById(R.id.saved_style_salon_weaved);
             style_image = itemView.findViewById(R.id.saved_style_image);
 
