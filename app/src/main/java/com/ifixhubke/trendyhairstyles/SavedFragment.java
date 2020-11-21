@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,6 +27,7 @@ public class SavedFragment extends Fragment {
     ArrayList<Saved> savedList;
     SavedAdapter savedAdapter;
     DatabaseReference databaseReference;
+    private String userID = null;
 
 
     @Override
@@ -34,7 +36,9 @@ public class SavedFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_saved, container, false);
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("saved");
+        userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("users").child(userID).child("saved");
 
         savedList = new ArrayList<>();
 

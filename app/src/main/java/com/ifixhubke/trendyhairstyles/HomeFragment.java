@@ -25,6 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.UUID;
 
 public class HomeFragment extends Fragment implements ItemClickListener {
 
@@ -32,6 +33,7 @@ public class HomeFragment extends Fragment implements ItemClickListener {
     private PostsAdapter adapter;
     private ProgressBar progressBar;
     private DatabaseReference databaseReference;
+    private String userID = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,6 +43,8 @@ public class HomeFragment extends Fragment implements ItemClickListener {
 
         FloatingActionButton createPost = view.findViewById(R.id.add_post_fab);
         progressBar = view.findViewById(R.id.recycler_progressbar);
+
+        userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         postList = new ArrayList<>();
         fetchPosts(view);
@@ -130,11 +134,11 @@ public class HomeFragment extends Fragment implements ItemClickListener {
     public void savePost(Post post, int position) {
         Toast.makeText(getContext(), "saved post " + post.getStyle_photo_url() + " " + post.getStyle_name() + " " +
                 post.getSalon_name() + " " + post.getStyle_price(), Toast.LENGTH_LONG).show();
-        databaseReference = FirebaseDatabase.getInstance().getReference("saved");
+        databaseReference = FirebaseDatabase.getInstance().getReference("users").child(userID).child("saved");
         Saved saved = new Saved(post.getStyle_photo_url(), post.getStyle_name(), post.getStyle_price(), post.getSalon_name(), true);
         String userID = FirebaseAuth.getInstance().getUid();
         assert userID != null;
-        databaseReference.child(userID).setValue(saved);
+        databaseReference.push().setValue(saved);
         Toast.makeText(getContext(), "Style Saved", Toast.LENGTH_SHORT).show();
 
     }
