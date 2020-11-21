@@ -15,4 +15,41 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/no_saved"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_magnifier"
+        tools:layout_editor_absoluteX="173dp"
+        tools:layout_editor_absoluteY="175dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/no_saved_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nothing Saved"
+        android:layout_marginTop="10dp"
+        android:visibility="invisible"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#aaaaaa"
+        app:layout_constraintEnd_toEndOf="@+id/no_saved"
+        app:layout_constraintStart_toStartOf="@+id/no_saved"
+        app:layout_constraintTop_toBottomOf="@+id/no_saved" />
+
+    <ProgressBar
+        android:id="@+id/saved_recycler_progressbar"
+        style="?android:attr/absListViewStyle"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

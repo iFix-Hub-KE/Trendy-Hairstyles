@@ -11,7 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -43,6 +45,7 @@ public class HomeFragment extends Fragment implements ItemClickListener {
 
         FloatingActionButton createPost = view.findViewById(R.id.add_post_fab);
         progressBar = view.findViewById(R.id.recycler_progressbar);
+
 
         userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -78,6 +81,13 @@ public class HomeFragment extends Fragment implements ItemClickListener {
                         progressBar.setVisibility(View.INVISIBLE);
                         initializeRecycler(view);
                     }
+                }
+                else{
+                    progressBar.setVisibility(View.INVISIBLE);
+                    TextView nothing_text = view.findViewById(R.id.nothing_here_text);
+                    ImageView nothing_image = view.findViewById(R.id.nothing_here);
+                    nothing_text.setVisibility(View.VISIBLE);
+                    nothing_image.setVisibility(View.VISIBLE);
                 }
             }
 

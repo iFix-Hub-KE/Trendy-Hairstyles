@@ -42,6 +42,29 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:id="@+id/nothing_here"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/ic_magnifier" />
+
+        <TextView
+            android:id="@+id/nothing_here_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:visibility="invisible"
+            android:textColor="#aaaaaa"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:text="No posts here!"
+            app:layout_constraintEnd_toEndOf="@+id/nothing_here"
+            app:layout_constraintStart_toStartOf="@+id/nothing_here"
+            app:layout_constraintTop_toBottomOf="@+id/nothing_here" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

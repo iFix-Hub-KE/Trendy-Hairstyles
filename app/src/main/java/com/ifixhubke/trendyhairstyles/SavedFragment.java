@@ -10,6 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -27,6 +30,7 @@ public class SavedFragment extends Fragment {
     ArrayList<Saved> savedList;
     SavedAdapter savedAdapter;
     DatabaseReference databaseReference;
+    ProgressBar progressBar;
     private String userID = null;
 
 
@@ -35,6 +39,8 @@ public class SavedFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_saved, container, false);
+
+        progressBar = view.findViewById(R.id.saved_recycler_progressbar);
 
         userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -45,12 +51,23 @@ public class SavedFragment extends Fragment {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot i : snapshot.getChildren()) {
-                    Saved saved = i.getValue(Saved.class);
-                    savedList.add(saved);
+                if (snapshot.exists()){
+                    for (DataSnapshot i : snapshot.getChildren()) {
+                        Saved saved = i.getValue(Saved.class);
+                        savedList.add(saved);
 
-                    initializeRecycler(view);
+                        initializeRecycler(view);
+                        progressBar.setVisibility(View.INVISIBLE);
+                    }
                 }
+                else {
+                    TextView no_saved_text = view.findViewById(R.id.no_saved_text);
+                    ImageView no_saved = view.findViewById(R.id.no_saved);
+                    progressBar.setVisibility(View.INVISIBLE);
+                    no_saved.setVisibility(View.VISIBLE);
+                    no_saved_text.setVisibility(View.VISIBLE);
+                }
+
             }
 
             @Override
